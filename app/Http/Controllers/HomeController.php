@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CasinoService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,12 +18,13 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @param CasinoService $casinoService
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(CasinoService $casinoService)
     {
-        return view('home');
+        $gameIsAvailable = $casinoService->hasPrizes();
+
+        return view('home', compact('gameIsAvailable'));
     }
 }
