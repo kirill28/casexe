@@ -9,6 +9,8 @@
 namespace App\Services\Prizable;
 
 
+use App\Services\WinResultHelper;
+
 interface Prizable
 {
     /**
@@ -18,7 +20,19 @@ interface Prizable
     public function isAvailable(): bool;
 
     /**
+     * Generates value property
+     * @return mixed
+     */
+    public function generateValue(): void;
+
+    /**
+     * Returns value property
      * @return mixed
      */
     public function getValue();
+
+    /**
+     * @return WinResultHelper
+     */
+    public function handle(): WinResultHelper;
 }

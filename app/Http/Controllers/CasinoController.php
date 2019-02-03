@@ -27,6 +27,9 @@ class CasinoController extends Controller
         }
 
         $prize = $this->casino->getPrize();
-        //TODO
+
+        session()->flash('winResult', $prize->handle());
+
+        return redirect()->back();
     }
 }

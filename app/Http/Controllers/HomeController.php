@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\CasinoService;
+use App\Services\WinResultHelper;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,9 @@ class HomeController extends Controller
     {
         $gameIsAvailable = $casinoService->hasPrizes();
 
-        return view('home', compact('gameIsAvailable'));
+        /** @var WinResultHelper|null $winResult */
+        $winResult = session()->get('winResult');
+
+        return view('home', compact('gameIsAvailable', 'winResult'));
     }
 }

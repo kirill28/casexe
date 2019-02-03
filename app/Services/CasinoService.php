@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\Services\Prizable\BonusPointPrize;
 use App\Services\Prizable\Prizable;
 
 class CasinoService
@@ -17,7 +18,9 @@ class CasinoService
 
     public function __construct()
     {
-        $prizes = [];
+        $prizes = [
+            new BonusPointPrize(),
+        ];
 
         $prizes = array_filter($prizes, function (Prizable $prize) {
             return $prize->isAvailable();
@@ -34,12 +37,12 @@ class CasinoService
         return count($this->prizes);
     }
 
-    public function getPrize()
+    public function getPrize(): Prizable
     {
         $index = crypto_rand_int(0, count($this->prizes) - 1);
+        /** @var Prizable $prize */
         $prize = $this->prizes[$index];
-        //TODO
+
+        return $prize;
     }
-
-
 }

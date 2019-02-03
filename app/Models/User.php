@@ -30,6 +30,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property float $bonus_points
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereBonusPoints($value)
  */
 class User extends Authenticatable
 {
@@ -52,4 +54,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @param int $value
+     * @return bool
+     */
+    public function addBonusPoints(int $value): bool
+    {
+        $this->bonus_points += $value;
+        return $this->save();
+    }
 }
