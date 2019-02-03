@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Services\Prizable\BonusPointPrize;
+use App\Services\Prizable\MoneyPrize;
 use App\Services\Prizable\Prizable;
 
 class CasinoService
@@ -19,7 +20,8 @@ class CasinoService
     public function __construct()
     {
         $prizes = [
-            new BonusPointPrize(),
+//            new BonusPointPrize(),
+            new MoneyPrize(),
         ];
 
         $prizes = array_filter($prizes, function (Prizable $prize) {

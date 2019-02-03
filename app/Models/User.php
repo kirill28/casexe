@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,12 +57,20 @@ class User extends Authenticatable
     ];
 
     /**
-     * @param int $value
+     * @param float $value
      * @return bool
      */
-    public function addBonusPoints(int $value): bool
+    public function addBonusPoints(float $value): bool
     {
         $this->bonus_points += $value;
         return $this->save();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function moneyTransactions(): HasMany
+    {
+        return $this->hasMany(MoneyTransaction::class, 'user_id', 'id');
     }
 }

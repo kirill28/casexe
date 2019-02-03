@@ -25,6 +25,11 @@ class WinResultHelper
     protected $data;
 
     /**
+     * @var bool
+     */
+    public $persist;
+
+    /**
      * WinResultHelper constructor.
      * @param string $viewName
      * @param array $data

@@ -20,3 +20,6 @@ Route::get('/home', function () {
 Auth::routes();
 
 Route::get('play', 'CasinoController@play')->name('play');
+Route::get('convert/{moneyTransaction}', 'CasinoController@convertToBonus')->name('convert_to_bonus');
+Route::post('apply-transaction/{moneyTransaction}', 'CasinoController@applyTransaction')
+    ->name('apply_transaction');

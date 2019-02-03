@@ -27,6 +27,9 @@ class SystemOption extends Model
     const MONEY_TO_BONUS_POINTS_COEFFICIENT = 'money_to_bonus_points_coefficient';
     const MONEY_MIN_VALUE = 'money_min_value';
     const MONEY_MAX_VALUE = 'money_max_value';
+    const PRIVAT_BANK_MERCHANT_ID = 'privat_bank_merchant_id';
+    const PRIVAT_BANK_MERCHANT_PASSWORD = 'privat_bank_merchant_password';
+    const PRIVAT_BANK_ENABLE_PAYMENTS = 'privat_bank_enable_payments';
 
     protected $fillable = [
         'name',
@@ -41,5 +44,16 @@ class SystemOption extends Model
     {
         return static::whereIn('name', $optionNames)
             ->pluck('value', 'name')->toArray();
+    }
+
+    /**
+     * @param string $optionName
+     * @return string
+     */
+    public static function getValue(string $optionName): string
+    {
+        return static::where('name', $optionName)
+            ->pluck('value')
+            ->first();
     }
 }

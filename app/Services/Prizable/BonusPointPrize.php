@@ -18,6 +18,8 @@ class BonusPointPrize extends Prize
 
     protected $max;
 
+    protected $moneyToBonusPointsCoefficient;
+
     public function __construct()
     {
         $optionNames = [
@@ -30,6 +32,7 @@ class BonusPointPrize extends Prize
 
         $this->min = $options[SystemOption::BONUS_POINTS_MIN_VALUE];
         $this->max = $options[SystemOption::BONUS_POINTS_MAX_VALUE];
+        $this->moneyToBonusPointsCoefficient = $options[SystemOption::MONEY_TO_BONUS_POINTS_COEFFICIENT];
     }
 
     /**
@@ -59,6 +62,19 @@ class BonusPointPrize extends Prize
         $value = $this->getValue();
         $user = \Auth::user();
 
+        $user->addBonusPoints($value);
+
+        return new WinResultHelper('casino._bonus_win', compact('value'));
+    }
+
+    /**
+     * @param float $amount
+     * @return WinResultHelper
+     */
+    public function convertFromMoney(float $amount): WinResultHelper
+    {
+        $value = $amount * $this->moneyToBonusPointsCoefficient;
+        $user = \Auth::user();
         $user->addBonusPoints($value);
 
         return new WinResultHelper('casino._bonus_win', compact('value'));
