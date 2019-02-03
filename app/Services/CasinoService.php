@@ -20,7 +20,7 @@ class CasinoService
     public function __construct()
     {
         $prizes = [
-//            new BonusPointPrize(),
+            new BonusPointPrize(),
             new MoneyPrize(),
         ];
 
