@@ -44,6 +44,7 @@ class ProcessTransaction extends Command
         $amount = (int) $this->argument('amount');
         if ($amount) {
             $transactions = MoneyTransaction::where('status', MoneyTransaction::STATUS_PENDING)
+                ->with('user')
                 ->limit($amount)->get();
             foreach ($transactions as $transaction) {
                 try {
