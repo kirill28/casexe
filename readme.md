@@ -23,3 +23,15 @@ You can login as
 user@mail.com / qweqwe
 or register a new user
 ```
+Console command for money sending
+```bash 
+php artisan transaction:process {amount}
+Example:
+php artisan transaction:process 10
+```
+Run unit test
+```bash 
+phpunit
+or if you see "No tests executed!"
+./vendor/bin/phpunit
+```
