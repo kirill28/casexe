@@ -11,7 +11,6 @@ namespace App\Services\Bank;
 
 use App\Models\MoneyTransaction;
 use App\Models\SystemOption;
-use Doctrine\DBAL\Driver\PDOException;
 use SimpleXMLElement;
 
 class PrivatBankService extends BankService
@@ -42,7 +41,7 @@ class PrivatBankService extends BankService
             $this->merchantId = $options[SystemOption::PRIVAT_BANK_MERCHANT_ID];
             $this->merchantPassword = $options[SystemOption::PRIVAT_BANK_MERCHANT_PASSWORD];
             $this->testMode = $options[SystemOption::PRIVAT_BANK_ENABLE_PAYMENTS] ? 0 : 1;
-        } catch (PDOException $exception) {
+        } catch (\PDOException $exception) {
             //artisan and composer throw an exception, might be because of abstract parent dependency
         }
     }
