@@ -30,13 +30,12 @@ class MoneyToBonusTest extends TestCase
         $property->setValue($prize, $coefficient);
         $property->setAccessible(false);
 
-
         $user = $this->createMock(User::class);
-        $user->method('addBonusPoints')->willReturnCallback(function ($value) use (&$requiredValue) {
-            $requiredValue = $value;
-            return true;
-        });
-        $user->method('save')->willReturn(true);
+        $user->method('addBonusPoints')
+            ->willReturnCallback(function ($value) use (&$requiredValue) {
+                $requiredValue = $value;
+                return true;
+            });
 
         \Auth::setUser($user);
 
