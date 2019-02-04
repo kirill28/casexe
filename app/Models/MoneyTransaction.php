@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MoneyTransaction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MoneyTransaction whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\User $user
  */
 class MoneyTransaction extends Model
 {

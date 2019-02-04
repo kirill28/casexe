@@ -33,6 +33,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @mixin \Eloquent
  * @property float $bonus_points
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereBonusPoints($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\MoneyTransaction[] $moneyTransactions
  */
 class User extends Authenticatable
 {
