@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ItemTransaction;
 use App\Models\MoneyTransaction;
 use App\Services\CasinoService;
 use App\Services\Prizable\BonusPointPrize;
@@ -58,7 +59,7 @@ class CasinoController extends Controller
         return redirect()->back();
     }
 
-    public function applyTransaction(Request $request, $transactionId)
+    public function applyMoneyTransaction(Request $request, $transactionId)
     {
         $validator = \Validator::make($request->all(), [
             'card_number' => 'required|digits:16',
@@ -72,6 +73,31 @@ class CasinoController extends Controller
         $moneyTransaction->card_number = $request->get('card_number');
         $moneyTransaction->status = MoneyTransaction::STATUS_PENDING;
         $moneyTransaction->save();
+
+        session()->forget('winResult');
+
+        return redirect()->back();
+    }
+
+    public function rejectItemTransaction($transactionId)
+    {
+        $itemTransaction = ItemTransaction::find($transactionId);
+        $item = $itemTransaction->item;
+
+        $item->available_count++;
+        $item->save();
+        $itemTransaction->delete();
+
+        session()->forget('winResult');
+
+        return redirect()->back();
+    }
+
+    public function applyItemTransaction($transactionId)
+    {
+        $itemTransaction = ItemTransaction::find($transactionId);
+        $itemTransaction->status = ItemTransaction::STATUS_PENDING;
+        $itemTransaction->save();
 
         session()->forget('winResult');
 

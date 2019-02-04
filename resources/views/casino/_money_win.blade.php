@@ -11,7 +11,7 @@
     </a>
 </div>
 <div class="col-md-4">
-    <form action="{{ route('apply_transaction', ['id' => $transactionId]) }}" method="POST">
+    <form action="{{ route('apply_money_transaction', ['id' => $transactionId]) }}" method="POST">
         {{ csrf_field() }}
 
         <div class="form-group @if($errors->first('card_number')) error @endif">

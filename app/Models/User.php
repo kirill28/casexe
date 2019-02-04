@@ -34,6 +34,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property float $bonus_points
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereBonusPoints($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\MoneyTransaction[] $moneyTransactions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemTransaction[] $itemTransactions
  */
 class User extends Authenticatable
 {
@@ -73,5 +74,13 @@ class User extends Authenticatable
     public function moneyTransactions(): HasMany
     {
         return $this->hasMany(MoneyTransaction::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function itemTransactions(): HasMany
+    {
+        return $this->hasMany(ItemTransaction::class, 'user_id', 'id');
     }
 }

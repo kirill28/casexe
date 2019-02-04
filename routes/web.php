@@ -21,5 +21,9 @@ Auth::routes();
 
 Route::get('play', 'CasinoController@play')->name('play');
 Route::get('convert/{moneyTransaction}', 'CasinoController@convertToBonus')->name('convert_to_bonus');
-Route::post('apply-transaction/{moneyTransaction}', 'CasinoController@applyTransaction')
-    ->name('apply_transaction');
+Route::post('apply-money-transaction/{moneyTransaction}', 'CasinoController@applyMoneyTransaction')
+    ->name('apply_money_transaction');
+Route::post('apply-item-transaction/{itemTransaction}', 'CasinoController@applyItemTransaction')
+    ->name('apply_item_transaction');
+Route::post('reject-item-transaction/{itemTransaction}', 'CasinoController@rejectItemTransaction')
+    ->name('reject_item_transaction');
