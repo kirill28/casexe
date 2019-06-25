@@ -29,6 +29,8 @@ class CasinoService
         $prizes = array_filter($prizes, function (Prizable $prize) {
             return $prize->isAvailable();
         });
+        //reset keys after filter
+        $prizes = array_values($prizes);
 
         $this->prizes = $prizes;
     }
