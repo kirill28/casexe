@@ -15,8 +15,10 @@ use App\Services\Bank\PrivatBankService;
 use App\Services\WinResultHelper;
 use Illuminate\Support\Collection;
 
-class MoneyPrize extends Prize
+class MoneyPrize implements Prizable
 {
+    protected $value;
+
     protected $min;
 
     protected $max;
@@ -39,6 +41,18 @@ class MoneyPrize extends Prize
         $this->max = $options[SystemOption::MONEY_MAX_VALUE];
 
         $this->bankService = new PrivatBankService();
+    }
+
+    /**
+     * Returns value property
+     * @return mixed
+     */
+    public function getValue()
+    {
+        if (is_null($this->value)) {
+            static::generateValue();
+        }
+        return $this->value;
     }
 
     /**

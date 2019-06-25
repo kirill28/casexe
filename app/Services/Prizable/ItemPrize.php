@@ -13,8 +13,21 @@ use App\Models\Item;
 use App\Models\ItemTransaction;
 use App\Services\WinResultHelper;
 
-class ItemPrize extends Prize
+class ItemPrize implements Prizable
 {
+    protected $value;
+
+    /**
+     * Returns value property
+     * @return mixed
+     */
+    public function getValue()
+    {
+        if (is_null($this->value)) {
+            static::generateValue();
+        }
+        return $this->value;
+    }
 
     /**
      * Checks if prizable item is in limit

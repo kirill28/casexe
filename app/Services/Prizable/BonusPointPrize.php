@@ -12,8 +12,10 @@ namespace App\Services\Prizable;
 use App\Models\SystemOption;
 use App\Services\WinResultHelper;
 
-class BonusPointPrize extends Prize
+class BonusPointPrize implements Prizable
 {
+    protected $value;
+
     protected $min;
 
     protected $max;
@@ -33,6 +35,18 @@ class BonusPointPrize extends Prize
         $this->min = $options[SystemOption::BONUS_POINTS_MIN_VALUE];
         $this->max = $options[SystemOption::BONUS_POINTS_MAX_VALUE];
         $this->moneyToBonusPointsCoefficient = $options[SystemOption::MONEY_TO_BONUS_POINTS_COEFFICIENT];
+    }
+
+    /**
+     * Returns value property
+     * @return mixed
+     */
+    public function getValue()
+    {
+        if (is_null($this->value)) {
+            static::generateValue();
+        }
+        return $this->value;
     }
 
     /**
