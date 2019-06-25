@@ -44,7 +44,7 @@ class CasinoController extends Controller
         return redirect()->back();
     }
 
-    public function convertToBonus(MoneyTransaction $moneyTransaction)
+    public function convertToBonus(MoneyTransaction $moneyTransaction, BonusPointPrize $prize)
     {
         if ($moneyTransaction->user_id !== \Auth::id()) {
             return redirect()->back();
@@ -52,7 +52,6 @@ class CasinoController extends Controller
 
         $value = $moneyTransaction->amount;
         $moneyTransaction->delete();
-        $prize = new BonusPointPrize();
         $result = $prize->convertFromMoney($value);
         session()->flash('winResult', $result);
 

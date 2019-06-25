@@ -18,12 +18,12 @@ class CasinoService
 {
     protected $prizes;
 
-    public function __construct()
+    public function __construct(BonusPointPrize $bonusPointPrize, MoneyPrize $moneyPrize, ItemPrize $itemPrize)
     {
         $prizes = [
-            new BonusPointPrize(),
-            new MoneyPrize(),
-            new ItemPrize(),
+            $bonusPointPrize,
+            $moneyPrize,
+            $itemPrize,
         ];
 
         $prizes = array_filter($prizes, function (Prizable $prize) {

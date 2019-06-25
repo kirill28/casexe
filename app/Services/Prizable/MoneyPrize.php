@@ -11,6 +11,7 @@ namespace App\Services\Prizable;
 
 use App\Models\MoneyTransaction;
 use App\Models\SystemOption;
+use App\Services\Bank\BankService;
 use App\Services\Bank\PrivatBankService;
 use App\Services\WinResultHelper;
 use Illuminate\Support\Collection;
@@ -24,11 +25,11 @@ class MoneyPrize implements Prizable
     protected $max;
 
     /**
-     * @var PrivatBankService
+     * @var BankService
      */
     protected $bankService;
 
-    public function __construct()
+    public function __construct(PrivatBankService $bankService)
     {
         $optionNames = [
             SystemOption::MONEY_MIN_VALUE,
@@ -40,7 +41,7 @@ class MoneyPrize implements Prizable
         $this->min = $options[SystemOption::MONEY_MIN_VALUE];
         $this->max = $options[SystemOption::MONEY_MAX_VALUE];
 
-        $this->bankService = new PrivatBankService();
+        $this->bankService = $bankService;
     }
 
     /**
