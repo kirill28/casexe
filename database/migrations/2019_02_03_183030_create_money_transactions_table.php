@@ -17,7 +17,7 @@ class CreateMoneyTransactionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('status');
-            $table->double('amount');
+            $table->decimal('amount');
             $table->string('currency');
             $table->string('card_number')->nullable();
             $table->text('info')->nullable();
