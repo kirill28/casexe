@@ -46,8 +46,7 @@ class ItemPrize implements Prizable
      */
     public function generateValue(): void
     {
-        $ids = \DB::table('items')
-            ->where('available_count', '>', 0)
+        $ids = Item::where('available_count', '>', 0)
             ->pluck('id')
             ->toArray();
         $index = crypto_rand_int(0, count($ids) - 1);

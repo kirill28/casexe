@@ -68,8 +68,7 @@ class MoneyPrize implements Prizable
             $isAvailable = $cardBalance >= $this->min;
         }
         if ($isAvailable) {
-            /** @var Collection $transactions */
-            $transactions = \DB::table('money_transactions')->whereIn('status', [
+            $transactions = MoneyTransaction::whereIn('status', [
                 MoneyTransaction::STATUS_PENDING,
                 MoneyTransaction::STATUS_WAITING,
             ])->select(['amount', 'currency'])->get();
